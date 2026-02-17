@@ -352,6 +352,8 @@ body{overflow:visible;background:#fff;color:#111}
 <div class="h-sep"></div>
 <div class="h-crumb" id="crumb"><b>Главная</b></div>
 <div class="h-actions">
+<button class="h-btn" id="hLogin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Войти</button>
+<button class="h-btn" id="hLogout" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Выйти</button>
 <button class="h-btn" id="hPresent" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21"/></svg> Показ</button>
 <button class="h-btn" id="hExport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> PDF</button>
 </div>
@@ -379,8 +381,13 @@ body{overflow:visible;background:#fff;color:#111}
 
 <div class="task-modal-bg" id="taskModalBg"><div class="task-modal"><div class="tm-header"><span>Задача</span><span class="tm-col-badge" id="tmColBadge"></span><button class="tm-close" id="tmClose">✕</button></div><div class="tm-body"><div class="tm-field"><label>Название</label><input class="tm-input" id="tmTitle" placeholder="Что нужно сделать?"></div><div class="tm-field"><label>Описание</label><textarea class="tm-textarea" id="tmDesc" placeholder="Подробности..."></textarea></div><div class="tm-row"><div class="tm-field"><label>Приоритет</label><select class="tm-input" id="tmPriority" style="cursor:pointer"><option value="">—</option><option value="high">Высокий</option><option value="mid">Средний</option><option value="low">Низкий</option></select></div><div class="tm-field"><label>Дедлайн</label><input class="tm-input" id="tmDate" type="date"></div></div><div class="tm-field"><label>Переместить в</label><select class="tm-input" id="tmMove" style="cursor:pointer"></select></div></div><div class="tm-footer"><button class="tm-del" id="tmDel">Удалить</button><button class="tm-save" id="tmSave">Сохранить</button></div></div></div>
 
+<div class="modal-bg" id="authModalBg"><div class="modal"><h3>Вход / Регистрация</h3><input class="modal-input" id="authUsername" placeholder="Имя пользователя"><input class="modal-input" id="authPassword" type="password" placeholder="Пароль"><div class="modal-actions"><button class="modal-btn cancel" id="authCancel">Отмена</button><button class="modal-btn ok" id="authRegister">Регистрация</button><button class="modal-btn ok" id="authLogin">Войти</button></div></div></div>
+
+
 <script>
 const K='workspace_v5';
+const API_URL = 'http://localhost:3000/api';
+let authToken = localStorage.getItem('token');
 const uid=()=>Math.random().toString(36).substr(2,9)+Date.now().toString(36);
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML};
@@ -388,8 +395,55 @@ const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.inn
 let S={projects:[],current:null};
 let dragCard=null,dragFromCol=null,editCard=null,editCol=null;
 
-function load(){try{const d=JSON.parse(localStorage.getItem(K));if(d?.projects)S=d;else throw 0}catch{S={projects:[],current:null}}}
-function save(){syncFromDom();localStorage.setItem(K,JSON.stringify(S))}
+async function load(){
+  if(authToken){
+    $('#hLogin').style.display='none';
+    $('#hLogout').style.display='flex';
+    try {
+      const res = await fetch(`${API_URL}/data`, {
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      if(res.ok){
+        const d = await res.json();
+        if(d?.projects) S = d;
+        else S = {projects:[], current:null};
+      } else {
+        if(res.status === 401 || res.status === 403) logout();
+        else throw new Error('Failed to load');
+      }
+    } catch(e) {
+      console.error(e);
+      // Fallback to local if server fails? Or just empty?
+      // For now, let's keep local as fallback or just show empty
+      const d=JSON.parse(localStorage.getItem(K));if(d?.projects)S=d;else S={projects:[],current:null}
+    }
+  } else {
+    $('#hLogin').style.display='flex';
+    $('#hLogout').style.display='none';
+    try{const d=JSON.parse(localStorage.getItem(K));if(d?.projects)S=d;else throw 0}catch{S={projects:[],current:null}}
+  }
+  renderSidebar();
+  if(S.current)openProject(S.current);else showHome();
+}
+
+async function save(){
+  syncFromDom();
+  localStorage.setItem(K,JSON.stringify(S));
+  if(authToken){
+    try {
+      await fetch(`${API_URL}/data`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ data: S })
+      });
+    } catch(e) {
+      console.error('Sync failed', e);
+    }
+  }
+}
 function proj(id){return S.projects.find(p=>p.id===(id||S.current))}
 function syncFromDom(){const p=proj();if(!p)return;if(p.type==='notes')readNotes(p);else if(p.type==='slides')readSlides(p);else if(p.type==='sheets')readSheets(p)}
 function defaultSlide(){return{id:uid(),layout:'left',bg:'dark',title:'',subtitle:'',body:'',kpis:[],imgSrc:''}}
@@ -668,8 +722,65 @@ $('#hExport').onclick=()=>print();
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){slashClose();$('#inlineTb').classList.remove('vis');$('#modalBg').classList.remove('vis');$('#taskModalBg').classList.remove('vis');$$('.knf').forEach(f=>f.classList.remove('open'))}if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();save()}});
 setInterval(save,3000);
 
+/* ═══ AUTH ═══ */
+$('#hLogin').onclick = () => {
+  $('#authModalBg').classList.add('vis');
+};
+$('#hLogout').onclick = () => {
+  authToken = null;
+  localStorage.removeItem('token');
+  $('#hLogin').style.display='flex';
+  $('#hLogout').style.display='none';
+  S = {projects:[], current:null};
+  renderSidebar();
+  showHome();
+};
+$('#authCancel').onclick = () => $('#authModalBg').classList.remove('vis');
+$('#authRegister').onclick = async () => {
+  const u = $('#authUsername').value;
+  const p = $('#authPassword').value;
+  if(!u || !p) return alert('Введите имя и пароль');
+  try {
+    const res = await fetch(`${API_URL}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: u, password: p })
+    });
+    if(res.ok) {
+      alert('Регистрация успешна! Теперь войдите.');
+    } else {
+      alert('Ошибка регистрации: ' + await res.text());
+    }
+  } catch(e) { console.error(e); alert('Ошибка сети'); }
+};
+$('#authLogin').onclick = async () => {
+  const u = $('#authUsername').value;
+  const p = $('#authPassword').value;
+  if(!u || !p) return alert('Введите имя и пароль');
+  try {
+    const res = await fetch(`${API_URL}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: u, password: p })
+    });
+    if(res.ok) {
+      const d = await res.json();
+      authToken = d.token;
+      localStorage.setItem('token', authToken);
+      $('#authModalBg').classList.remove('vis');
+      load();
+    } else {
+      alert('Ошибка входа');
+    }
+  } catch(e) { console.error(e); alert('Ошибка сети'); }
+};
+
 /* ═══ INIT ═══ */
-load();renderSidebar();if(S.current)openProject(S.current);else showHome();
+// Add simple auth button logic if not already present
+$('#hLogin').onclick = () => $('#authModalBg').classList.add('vis');
+$('#authCancel').onclick = () => $('#authModalBg').classList.remove('vis');
+
+load();
 </script>
 </body>
 </html>
