@@ -412,16 +412,14 @@ d.querySelector('.ni-act').onclick=e=>{e.stopPropagation();deleteProject(p.id)};
 }
 function showView(id){$$('.view').forEach(v=>v.classList.remove('active'));$(id).classList.add('active')}
 function showHome(){S.current=null;$$('.nav-item').forEach(n=>n.classList.remove('active'));$('#navHome').classList.add('active');$('#crumb').innerHTML='<b>Главная</b>';$('#hPresent').style.display='none';showView('#viewHome');renderHome();save()}
-function openProject(id){save();S.current=id;renderSidebar();const p=proj();if(!p)return showHome();
+function openProject(id){S.current=id;renderSidebar();const p=proj();if(!p)return showHome();
 $('#crumb').innerHTML=`<b>${esc(p.name)}</b> <span style="color:var(--t3)">· ${p.type}</span>`;
 $('#hPresent').style.display=p.type==='slides'?'flex':'none';
 if(p.type==='notes'){showView('#viewNotes');renderNotes(p)}
 else if(p.type==='slides'){showView('#viewSlides');renderSlidesView(p)}
 else if(p.type==='sheets'){showView('#viewSheets');renderSheetsView(p)}
 else if(p.type==='kanban'){showView('#viewKanban');renderKanban(p)}
-// close sidebar on mobile
 if(innerWidth<=768){$('#sidebar').classList.remove('open-m')}
-save();
 }
 
 function renderHome(){
