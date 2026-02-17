@@ -302,73 +302,6 @@ button{font-family:var(--font)}
   body{overflow:visible}
   .slide-card{break-after:page;border:none!important;border-radius:0!important;aspect-ratio:auto;min-height:100vh}
 }
-
-  /* ═══ KANBAN ENHANCED ═══ */
-.kanban-card{position:relative;transition:transform .15s,box-shadow .15s,opacity .15s}
-.kanban-card.dragging{opacity:.5;transform:scale(.95)}
-.kanban-card.drag-over-top{border-top:2px solid var(--accent);margin-top:-2px}
-.kanban-card.drag-over-bot{border-bottom:2px solid var(--accent);margin-bottom:-2px}
-.kanban-cards.drag-hover{background:var(--accent-soft);border-radius:var(--radius)}
-.kk-meta{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
-.kk-priority{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.kk-priority.p-high{background:rgba(248,113,113,.15);color:var(--red)}
-.kk-priority.p-mid{background:rgba(251,191,36,.15);color:var(--yellow)}
-.kk-priority.p-low{background:rgba(52,211,153,.15);color:var(--green)}
-.kk-date{font-size:11px;color:var(--t3);display:flex;align-items:center;gap:3px}
-.kk-date svg{width:12px;height:12px}
-.kk-desc{font-size:12px;color:var(--t3);margin-top:4px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.kk-edit-btn{position:absolute;top:6px;right:6px;opacity:0;background:var(--bg4);border:none;color:var(--t2);cursor:pointer;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;transition:.1s}
-.kanban-card:hover .kk-edit-btn{opacity:1}
-.kk-edit-btn:hover{background:var(--accent);color:#fff}
-.kk-edit-btn svg{width:12px;height:12px}
-
-/* card creation form */
-.kanban-new-form{background:var(--bg3);border:1px solid var(--accent);border-radius:var(--radius);padding:10px;margin:4px 8px 8px;display:none}
-.kanban-new-form.open{display:block}
-.knf-input{width:100%;background:var(--bg4);border:1px solid var(--bg5);border-radius:6px;padding:7px 10px;color:var(--t1);font-size:13px;font-family:var(--font);outline:none;margin-bottom:6px;resize:none}
-.knf-input:focus{border-color:var(--accent)}
-.knf-input::placeholder{color:var(--t3)}
-.knf-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
-.knf-select{background:var(--bg4);border:1px solid var(--bg5);border-radius:6px;padding:5px 8px;color:var(--t2);font-size:12px;font-family:var(--font);outline:none;cursor:pointer}
-.knf-select:focus{border-color:var(--accent)}
-.knf-date{background:var(--bg4);border:1px solid var(--bg5);border-radius:6px;padding:5px 8px;color:var(--t2);font-size:12px;font-family:var(--font);outline:none}
-.knf-date:focus{border-color:var(--accent)}
-.knf-actions{display:flex;gap:6px}
-.knf-btn{padding:6px 14px;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-family:var(--font)}
-.knf-btn.ok{background:var(--accent);color:#fff}
-.knf-btn.ok:hover{background:#3b7be0}
-.knf-btn.cancel{background:var(--bg4);color:var(--t2)}
-.knf-btn.cancel:hover{background:var(--bg5)}
-
-/* task detail modal */
-.task-modal-bg{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.6);display:none;align-items:flex-start;justify-content:center;padding-top:10vh;backdrop-filter:blur(4px)}
-.task-modal-bg.vis{display:flex}
-.task-modal{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--radius3);width:90%;max-width:540px;box-shadow:0 16px 48px rgba(0,0,0,.5);overflow:hidden}
-.tm-header{display:flex;align-items:center;gap:8px;padding:16px 20px;border-bottom:1px solid var(--bg4)}
-.tm-header .tm-col-badge{font-size:11px;background:var(--bg4);padding:3px 8px;border-radius:6px;color:var(--t3)}
-.tm-header .tm-close{margin-left:auto;background:none;border:none;color:var(--t3);cursor:pointer;font-size:18px;padding:4px;border-radius:4px}
-.tm-header .tm-close:hover{background:var(--bg3);color:var(--t1)}
-.tm-body{padding:20px}
-.tm-field{margin-bottom:16px}
-.tm-field label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:6px}
-.tm-input{width:100%;background:var(--bg3);border:1px solid var(--bg4);border-radius:var(--radius);padding:9px 12px;color:var(--t1);font-size:14px;font-family:var(--font);outline:none}
-.tm-input:focus{border-color:var(--accent)}
-.tm-textarea{width:100%;background:var(--bg3);border:1px solid var(--bg4);border-radius:var(--radius);padding:9px 12px;color:var(--t1);font-size:14px;font-family:var(--font);outline:none;min-height:80px;resize:vertical}
-.tm-textarea:focus{border-color:var(--accent)}
-.tm-row{display:flex;gap:12px}
-.tm-row .tm-field{flex:1}
-.tm-footer{display:flex;gap:8px;justify-content:space-between;padding:0 20px 20px}
-.tm-del{background:none;border:1px solid var(--red);color:var(--red);padding:8px 16px;border-radius:var(--radius);cursor:pointer;font-size:13px;font-family:var(--font);transition:.15s}
-.tm-del:hover{background:rgba(248,113,113,.1)}
-.tm-save{background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:var(--radius);cursor:pointer;font-size:13px;font-family:var(--font)}
-.tm-save:hover{background:#3b7be0}
-
-/* kanban col delete */
-.kc-del{background:none;border:none;color:var(--t3);cursor:pointer;padding:2px;border-radius:3px;display:flex;opacity:0;transition:.1s}
-.kanban-col-head:hover .kc-del{opacity:1}
-.kc-del:hover{color:var(--red);background:rgba(248,113,113,.1)}
-.kc-del svg{width:14px;height:14px}
-
 </style>
 </head>
 <body>
@@ -465,51 +398,6 @@ button{font-family:var(--font)}
     </div>
   </div>
 </div>
-
-  <!-- TASK MODAL -->
-<div class="task-modal-bg" id="taskModalBg">
-  <div class="task-modal">
-    <div class="tm-header">
-      <span style="font-weight:700">Задача</span>
-      <span class="tm-col-badge" id="tmColBadge">Колонка</span>
-      <button class="tm-close" id="tmClose">✕</button>
-    </div>
-    <div class="tm-body">
-      <div class="tm-field">
-        <label>Название</label>
-        <input class="tm-input" id="tmTitle" placeholder="Что нужно сделать?">
-      </div>
-      <div class="tm-field">
-        <label>Описание</label>
-        <textarea class="tm-textarea" id="tmDesc" placeholder="Подробности задачи..."></textarea>
-      </div>
-      <div class="tm-row">
-        <div class="tm-field">
-          <label>Приоритет</label>
-          <select class="tm-input" id="tmPriority" style="cursor:pointer">
-            <option value="">Без приоритета</option>
-            <option value="high">Высокий</option>
-            <option value="mid">Средний</option>
-            <option value="low">Низкий</option>
-          </select>
-        </div>
-        <div class="tm-field">
-          <label>Дедлайн</label>
-          <input class="tm-input" id="tmDate" type="date">
-        </div>
-      </div>
-      <div class="tm-field">
-        <label>Переместить в</label>
-        <select class="tm-input" id="tmMove" style="cursor:pointer"></select>
-      </div>
-    </div>
-    <div class="tm-footer">
-      <button class="tm-del" id="tmDel">Удалить задачу</button>
-      <button class="tm-save" id="tmSave">Сохранить</button>
-    </div>
-  </div>
-</div>
-
 
 <script>
 /* ═══════════════════════════════════════════════
@@ -837,326 +725,71 @@ function loadSheet(url){
 /* ═══════════════════════════════════════════════
    KANBAN
    ═══════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════
-   KANBAN (ENHANCED)
-   ═══════════════════════════════════════════════ */
-let dragCard=null,dragFromCol=null,dragCardEl=null;
-let editCard=null,editCol=null;
+const TAG_COLORS=['var(--accent)','var(--green)','var(--yellow)','var(--red)','var(--purple)','var(--pink)','var(--orange)'];
+let dragCard=null,dragFromCol=null;
 
 function renderKanban(p){
   const v=$('#viewKanban');
   v.innerHTML=`<div class="kanban-area"><div class="kanban-header"><h2>${esc(p.name)}</h2></div><div class="kanban-board" id="kBoard"></div></div>`;
   const board=$('#kBoard');
   (p.columns||[]).forEach(col=>board.appendChild(mkKanbanCol(col,p)));
-  // add column
   const addBtn=document.createElement('button');addBtn.className='add-col-btn';addBtn.innerHTML='+ Колонка';
-  addBtn.onclick=()=>{
-    const name=prompt('Название колонки:','Новая');if(!name)return;
-    const colors=['#4f8ff7','#34d399','#fbbf24','#f87171','#a78bfa','#f472b6','#fb923c'];
-    p.columns.push({id:uid(),title:name,color:colors[p.columns.length%colors.length],cards:[]});
-    save();renderKanban(p);
-  };
+  addBtn.onclick=()=>{p.columns.push({id:uid(),title:'Новая',color:TAG_COLORS[p.columns.length%TAG_COLORS.length],cards:[]});save();renderKanban(p)};
   board.appendChild(addBtn);
 }
 
 function readKanbanFromDom(p){
-  /* cards already updated via save on every action */
+
+  $$('#kBoard .kanban-col').forEach(colEl=>{
+    const col=p.columns?.find(c=>c.id===colEl.dataset.cid);if(!col)return;
+    col.title=colEl.querySelector('.kc-title')?.textContent||'';
+    col.cards=[];
+    colEl.querySelectorAll('.kanban-card').forEach(cardEl=>{
+      col.cards.push({id:cardEl.dataset.kid,text:cardEl.querySelector('.kk-title')?.textContent||'',color:cardEl.dataset.color||''});
+    });
+  });
 }
 
 function mkKanbanCol(col,p){
   const el=document.createElement('div');el.className='kanban-col';el.dataset.cid=col.id;
-
-  // header
   const head=document.createElement('div');head.className='kanban-col-head';
-  head.innerHTML=`
-    <div class="kc-dot" style="background:${col.color}"></div>
-    <div class="kc-title" contenteditable="true">${esc(col.title)}</div>
-    <span class="kc-count">${col.cards?.length||0}</span>
-    <button class="kc-del" title="Удалить колонку"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
-  head.querySelector('.kc-title').addEventListener('input',e=>{col.title=e.target.textContent;save()});
-  head.querySelector('.kc-del').addEventListener('click',()=>{
-    if(col.cards?.length&&!confirm(`В колонке ${col.cards.length} задач. Удалить?`))return;
-    p.columns=p.columns.filter(c=>c.id!==col.id);save();renderKanban(p);
-  });
+  head.innerHTML=`<div class="kc-dot" style="background:${col.color}"></div><div class="kc-title" contenteditable="true">${esc(col.title)}</div><span class="kc-count">${col.cards?.length||0}</span>`;
+  head.querySelector('.kc-title').addEventListener('input',()=>save());
   el.appendChild(head);
 
-  // cards container
   const cards=document.createElement('div');cards.className='kanban-cards';
-  (col.cards||[]).forEach(c=>cards.appendChild(mkKanbanCard(c,col,p)));
+  (col.cards||[]).forEach(c=>cards.appendChild(mkKanbanCard(c,col)));
   el.appendChild(cards);
 
-  // drop on empty area
-  cards.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='move';cards.classList.add('drag-hover')});
-  cards.addEventListener('dragleave',e=>{if(!cards.contains(e.relatedTarget))cards.classList.remove('drag-hover')});
+  // drop zone
+  cards.addEventListener('dragover',e=>{e.preventDefault();cards.style.background='var(--accent-soft)'});
+  cards.addEventListener('dragleave',()=>cards.style.background='');
   cards.addEventListener('drop',e=>{
-    e.preventDefault();cards.classList.remove('drag-hover');
-    if(!dragCard||!dragFromCol)return;
-    // remove from source
-    dragFromCol.cards=dragFromCol.cards.filter(c=>c.id!==dragCard.id);
-    // add to this column (at end)
+    e.preventDefault();cards.style.background='';
+    if(!dragCard)return;
+    // remove from old col
+    if(dragFromCol)dragFromCol.cards=dragFromCol.cards.filter(c=>c.id!==dragCard.id);
     col.cards.push(dragCard);
-    dragCard=null;dragFromCol=null;dragCardEl=null;
+    dragCard=null;dragFromCol=null;
     save();renderKanban(p);
   });
 
-  // touch support for drop
-  cards.addEventListener('touchmove',e=>e.preventDefault(),{passive:false});
-
-  // add card form
-  const form=document.createElement('div');form.className='kanban-new-form';form.id='knf_'+col.id;
-  form.innerHTML=`
-    <input class="knf-input" placeholder="Название задачи..." data-field="title">
-    <textarea class="knf-input" placeholder="Описание (необязательно)" rows="2" data-field="desc"></textarea>
-    <div class="knf-row">
-      <select class="knf-select" data-field="priority">
-        <option value="">Приоритет</option>
-        <option value="high">Высокий</option>
-        <option value="mid">Средний</option>
-        <option value="low">Низкий</option>
-      </select>
-      <input class="knf-date" type="date" data-field="date">
-    </div>
-    <div class="knf-actions">
-      <button class="knf-btn ok" data-act="add">Добавить</button>
-      <button class="knf-btn cancel" data-act="cancel">Отмена</button>
-    </div>`;
-  form.querySelector('[data-act=add]').addEventListener('click',()=>{
-    const title=form.querySelector('[data-field=title]').value.trim();
-    if(!title)return form.querySelector('[data-field=title]').focus();
-    const card={
-      id:uid(),
-      text:title,
-      desc:form.querySelector('[data-field=desc]').value.trim(),
-      priority:form.querySelector('[data-field=priority]').value,
-      date:form.querySelector('[data-field=date]').value,
-      color:col.color
-    };
-    col.cards.push(card);save();renderKanban(p);
-  });
-  form.querySelector('[data-act=cancel]').addEventListener('click',()=>form.classList.remove('open'));
-  form.querySelector('[data-field=title]').addEventListener('keydown',e=>{
-    if(e.key==='Enter'){e.preventDefault();form.querySelector('[data-act=add]').click()}
-    if(e.key==='Escape')form.classList.remove('open');
-  });
-  el.appendChild(form);
-
-  // add button
   const addBtn=document.createElement('button');addBtn.className='kanban-add';
-  addBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Добавить задачу';
-  addBtn.onclick=()=>{
-    // close other forms
-
-    $$('.kanban-new-form').forEach(f=>f.classList.remove('open'));
-    form.classList.add('open');
-    form.querySelector('[data-field=title]').value='';
-    form.querySelector('[data-field=desc]').value='';
-    form.querySelector('[data-field=priority]').value='';
-    form.querySelector('[data-field=date]').value='';
-    form.querySelector('[data-field=title]').focus();
-  };
+  addBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Добавить';
+  addBtn.onclick=()=>{col.cards.push({id:uid(),text:'',color:TAG_COLORS[Math.floor(Math.random()*TAG_COLORS.length)]});save();renderKanban(p)};
   el.appendChild(addBtn);
 
   return el;
 }
 
-function mkKanbanCard(c,col,p){
-  const el=document.createElement('div');el.className='kanban-card';el.dataset.kid=c.id;el.draggable=true;
-
-  // priority badge
-  let prioHtml='';
-  if(c.priority==='high')prioHtml='<span class="kk-priority p-high">Высокий</span>';
-  else if(c.priority==='mid')prioHtml='<span class="kk-priority p-mid">Средний</span>';
-  else if(c.priority==='low')prioHtml='<span class="kk-priority p-low">Низкий</span>';
-
-  // date
-  let dateHtml='';
-  if(c.date){
-    const d=new Date(c.date);
-    const today=new Date();today.setHours(0,0,0,0);
-    const isOverdue=d<today;
-    dateHtml=`<span class="kk-date" style="${isOverdue?'color:var(--red)':''}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${d.toLocaleDateString('ru-RU',{day:'numeric',month:'short'})}</span>`;
-  }
-
-  el.innerHTML=`
-    <button class="kk-edit-btn" title="Редактировать"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-    <span class="kk-title">${esc(c.text)}</span>
-    ${c.desc?`<div class="kk-desc">${esc(c.desc)}</div>`:''}
-    <div class="kk-meta">${prioHtml}${dateHtml}</div>`;
-
-  // edit button
-  el.querySelector('.kk-edit-btn').addEventListener('click',e=>{
-    e.stopPropagation();
-    openTaskModal(c,col,p);
-  });
-
-  // drag start
-  el.addEventListener('dragstart',e=>{
-    dragCard=c;dragFromCol=col;dragCardEl=el;
-    el.classList.add('dragging');
-    e.dataTransfer.effectAllowed='move';
-    // for Firefox
-    e.dataTransfer.setData('text/plain',c.id);
-  });
-  el.addEventListener('dragend',()=>{
-    el.classList.remove('dragging');
-    dragCard=null;dragFromCol=null;dragCardEl=null;
-
-    $$('.kanban-card').forEach(c=>c.classList.remove('drag-over-top','drag-over-bot'));
-
-    $$('.kanban-cards').forEach(c=>c.classList.remove('drag-hover'));
-  });
-
-  // drag over card (for reordering within column)
-  el.addEventListener('dragover',e=>{
-    e.preventDefault();e.dataTransfer.dropEffect='move';
-    if(!dragCard||dragCard.id===c.id)return;
-    const rect=el.getBoundingClientRect();
-    const midY=rect.top+rect.height/2;
-
-    $$('.kanban-card').forEach(c=>c.classList.remove('drag-over-top','drag-over-bot'));
-    if(e.clientY<midY)el.classList.add('drag-over-top');
-    else el.classList.add('drag-over-bot');
-  });
-  el.addEventListener('dragleave',()=>{
-    el.classList.remove('drag-over-top','drag-over-bot');
-  });
-
-  // drop on card (insert before/after)
-  el.addEventListener('drop',e=>{
-    e.preventDefault();e.stopPropagation();
-
-    $$('.kanban-card').forEach(c=>c.classList.remove('drag-over-top','drag-over-bot'));
-
-    $$('.kanban-cards').forEach(c=>c.classList.remove('drag-hover'));
-    if(!dragCard||dragCard.id===c.id)return;
-
-    const rect=el.getBoundingClientRect();
-    const dropAbove=e.clientY<rect.top+rect.height/2;
-
-    // remove from source
-    dragFromCol.cards=dragFromCol.cards.filter(x=>x.id!==dragCard.id);
-
-    // insert at position in target column
-    const targetIdx=col.cards.findIndex(x=>x.id===c.id);
-    if(targetIdx===-1){
-      col.cards.push(dragCard);
-    } else {
-      col.cards.splice(dropAbove?targetIdx:targetIdx+1,0,dragCard);
-    }
-
-    dragCard=null;dragFromCol=null;dragCardEl=null;
-    save();renderKanban(p);
-  });
-
-  // Touch drag support
-  let touchClone=null,touchStartY=0,touchStartX=0;
-  el.addEventListener('touchstart',e=>{
-    const touch=e.touches[0];
-    touchStartX=touch.clientX;touchStartY=touch.clientY;
-    dragCard=c;dragFromCol=col;
-    // long press to start drag
-    el._touchTimer=setTimeout(()=>{
-      el.classList.add('dragging');
-      touchClone=el.cloneNode(true);
-      touchClone.style.cssText='position:fixed;z-index:9999;pointer-events:none;opacity:.8;width:'+el.offsetWidth+'px;transform:rotate(3deg)';
-      document.body.appendChild(touchClone);
-    },200);
-  },{passive:true});
-  el.addEventListener('touchmove',e=>{
-    if(!touchClone){clearTimeout(el._touchTimer);return}
-    e.preventDefault();
-    const touch=e.touches[0];
-    touchClone.style.left=(touch.clientX-60)+'px';
-    touchClone.style.top=(touch.clientY-20)+'px';
-    // highlight drop target
-    const target=document.elementFromPoint(touch.clientX,touch.clientY);
-
-    $$('.kanban-cards').forEach(c=>c.classList.remove('drag-hover'));
-    const cardsZone=target?.closest('.kanban-cards');
-    if(cardsZone)cardsZone.classList.add('drag-hover');
-  },{passive:false});
-  el.addEventListener('touchend',e=>{
-    clearTimeout(el._touchTimer);
-    if(touchClone){
-      touchClone.remove();touchClone=null;
-      el.classList.remove('dragging');
-      const touch=e.changedTouches[0];
-      const target=document.elementFromPoint(touch.clientX,touch.clientY);
-      const targetCards=target?.closest('.kanban-cards');
-      const targetColEl=target?.closest('.kanban-col');
-      if(targetColEl&&dragCard){
-        const targetCol=p.columns.find(co=>co.id===targetColEl.dataset.cid);
-        if(targetCol&&targetCol!==dragFromCol){
-          dragFromCol.cards=dragFromCol.cards.filter(x=>x.id!==dragCard.id);
-          targetCol.cards.push(dragCard);
-        }
-      }
-
-      $$('.kanban-cards').forEach(c=>c.classList.remove('drag-hover'));
-      dragCard=null;dragFromCol=null;
-      save();renderKanban(p);
-    }
-  });
-
+function mkKanbanCard(c,col){
+  const el=document.createElement('div');el.className='kanban-card';el.dataset.kid=c.id;el.dataset.color=c.color||'';el.draggable=true;
+  el.innerHTML=`<span class="kk-title" contenteditable="true">${esc(c.text)}</span>${c.color?`<span class="kk-tag" style="background:${c.color};color:#fff">Задача</span>`:''}`;
+  el.querySelector('.kk-title').addEventListener('input',()=>save());
+  el.addEventListener('dragstart',()=>{dragCard=c;dragFromCol=col;el.style.opacity='.4'});
+  el.addEventListener('dragend',()=>{el.style.opacity='1'});
   return el;
 }
-
-/* ═══ TASK MODAL ═══ */
-function openTaskModal(card,col,p){
-  editCard=card;editCol=col;
-  $('#tmTitle').value=card.text||'';
-  $('#tmDesc').value=card.desc||'';
-  $('#tmPriority').value=card.priority||'';
-  $('#tmDate').value=card.date||'';
-  $('#tmColBadge').textContent=col.title;
-
-  // populate column selector
-  const sel=$('#tmMove');sel.innerHTML='';
-  p.columns.forEach(c=>{
-    const opt=document.createElement('option');opt.value=c.id;opt.textContent=c.title;
-    if(c.id===col.id)opt.selected=true;
-    sel.appendChild(opt);
-  });
-
-  $('#taskModalBg').classList.add('vis');
-  setTimeout(()=>$('#tmTitle').focus(),100);
-}
-
-$('#tmClose').onclick=()=>$('#taskModalBg').classList.remove('vis');
-$('#taskModalBg').onclick=e=>{if(e.target===$('#taskModalBg'))$('#taskModalBg').classList.remove('vis')};
-
-$('#tmSave').onclick=()=>{
-  if(!editCard)return;
-  editCard.text=$('#tmTitle').value.trim()||'Без названия';
-  editCard.desc=$('#tmDesc').value.trim();
-  editCard.priority=$('#tmPriority').value;
-  editCard.date=$('#tmDate').value;
-
-  // move to another column?
-  const targetColId=$('#tmMove').value;
-  const p=proj();
-  if(targetColId!==editCol.id){
-    editCol.cards=editCol.cards.filter(c=>c.id!==editCard.id);
-    const targetCol=p.columns.find(c=>c.id===targetColId);
-    if(targetCol)targetCol.cards.push(editCard);
-  }
-
-  save();renderKanban(p);
-  $('#taskModalBg').classList.remove('vis');
-  editCard=null;editCol=null;
-};
-
-$('#tmDel').onclick=()=>{
-  if(!editCard)return;
-  if(!confirm('Удалить задачу?'))return;
-  editCol.cards=editCol.cards.filter(c=>c.id!==editCard.id);
-  save();renderKanban(proj());
-  $('#taskModalBg').classList.remove('vis');
-  editCard=null;editCol=null;
-};
-
-$('#tmTitle').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('#tmSave').click()}});
-
 
 /* ═══════════════════════════════════════════════
    SLASH MENU
@@ -1235,8 +868,7 @@ $('#modalInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#modalOk')
 $('#hToggle').onclick=()=>{const sb=$('#sidebar');if(innerWidth<=768){sb.classList.toggle('open-m')}else{sb.classList.toggle('closed');$('#mainWrap').classList.toggle('full',sb.classList.contains('closed'))}};
 $('#navHome').onclick=showHome;
 $('#hExport').onclick=()=>print();
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){slashClose();$('#inlineTb').classList.remove('vis');$('#modalBg').classList.remove('vis');$('#taskModalBg').classList.remove('vis');$$('.kanban-new-form').forEach(f=>f.classList.remove('open'))}if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();save()}});
-
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){slashClose();$('#inlineTb').classList.remove('vis');$('#modalBg').classList.remove('vis')}if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();save()}});
 setInterval(save,3000);
 
 /* ═══ INIT ═══ */
@@ -1245,3 +877,4 @@ if(S.current)openProject(S.current);else showHome();
 </script>
 </body>
 </html>
+
