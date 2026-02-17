@@ -400,7 +400,7 @@ if(type==='notes')p.blocks=[{id:uid(),type:'p',content:''}];
 else if(type==='slides')p.slides=[defaultSlide()];
 else if(type==='sheets')p.sheets=[{id:uid(),name:'Лист 1',url:''}];
 else if(type==='kanban')p.columns=[{id:uid(),title:'Сделать',color:'#54566b',cards:[]},{id:uid(),title:'В работе',color:'#4f8ff7',cards:[]},{id:uid(),title:'Готово',color:'#34d399',cards:[]}];
-S.projects.push(p);S.current=p.id;save();renderSidebar();openProject(p.id);
+S.projects.push(p);S.current=p.id;localStorage.setItem(K,JSON.stringify(S));renderSidebar();openProject(p.id);
 }
 function deleteProject(id){if(!confirm('Удалить проект?'))return;S.projects=S.projects.filter(p=>p.id!==id);if(S.current===id)S.current=null;save();renderSidebar();showHome()}
 
